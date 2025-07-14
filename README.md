@@ -26,7 +26,67 @@ git clone https://github.com/DjangoPeng/deepseek-quickstart.git
 
 
 
-**以下是详细的安装指导（以 Ubuntu 操作系统为例）**：
+**以下是详细的安装指导（以 Ubuntu 22.04 操作系统为例）**：
+
+---
+
+### （可选）安装 CUDA Toolkit 和 GPU 驱动
+
+*如果对数据保护和隐私安全有要求，需要私有化部署请搭建以下 GPU 开发环境*
+
+
+（若使用华为云 GPU 服务器，无需安装，Ubuntu 22.04 操作系统自带）下载并安装 CUDA 12.4 Toolkit 和 GPU驱动：
+
+```shell
+wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run
+sudo sh cuda_12.4.0_550.54.14_linux.run
+```
+
+成功安装输出日志如下：
+
+```shell
+===========
+= Summary =
+===========
+
+Driver:   Installed
+Toolkit:  Installed in /usr/local/cuda-12.4/
+
+Please make sure that
+ -   PATH includes /usr/local/cuda-12.4/bin
+ -   LD_LIBRARY_PATH includes /usr/local/cuda-12.4/lib64, or, add /usr/local/cuda-12.4/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-12.4/bin
+To uninstall the NVIDIA Driver, run nvidia-uninstall
+Logfile is /var/log/cuda-installer.log
+```
+
+安装完成后，使用 `nvidia-smi` 指令查看版本：
+
+```shell
+Mon Jun  9 12:05:27 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla T4                       Off |   00000000:00:0D.0 Off |                  Off |
+| N/A   57C    P0             28W /   70W |       0MiB /  16384MiB |      7%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+```
+
+---
 
 ### 安装 Miniconda
 
@@ -93,6 +153,10 @@ $ nohup jupyter lab --port=8000 --NotebookApp.token='替换为你的密码' --no
 
 Jupyter Lab 输出的日志将会保存在 `nohup.out` 文件（已在 .gitignore中过滤）。
 
+
+### 安装 Docker 和 Docker Compose（用于 Ollama, Dify, LangBot 等私有化部署）
+
+详见文档[!Ubuntu 安装 Docker 和 Docker Compose 指南](docs/docker.md)
 
 ## 贡献
 
